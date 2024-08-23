@@ -2,9 +2,9 @@
   <div class="flex flex-col justify-center gap-3">
     <h1 class="text-white text-4xl font-semibold">Dynamic Caching</h1>
     <p class="text-white flex justify-center text-xl font-light">
-      Cache Efficiency :
+      Efficiency :
       <strong
-        [ngClass]="workload.mode === 'dynamic' ? 'text-primary-400' : 'text-white'"
+        [ngClass]="workload.efficiency() > 75 ? 'text-primary-400' : 'text-white'"
         class="flex min-w-20 justify-center font-bold"
         >{{ workload.efficiency() }} %</strong
       >

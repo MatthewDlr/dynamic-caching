@@ -6,7 +6,7 @@ import { Injectable, signal } from "@angular/core";
 export class WorkloadService {
   public MAX_WORKLOAD = 10;
   public mode: "standard" | "dynamic" = "standard";
-  public cache: number[] = new Array(20).fill(0);
+  public cache: number[][] = new Array(20).fill([0]);
   private workloadQueue: number[] = [...this.generateRandomTasks(10)];
   public efficiency = signal(0);
 
@@ -21,18 +21,28 @@ export class WorkloadService {
         this.standardCaching();
       }
 
+      console.log(this.cache);
       this.calculateEfficiency();
-    }, 500);
+    }, 250);
   }
 
-  private dynamicCaching() {}
+  private dynamicCaching() {
+    this.standardCaching();
+
+    for (let i = this.cache.length - 2; i > 0; i--) {
+      let sum = 0;
+      for (const taskValue of this.cache[i]) {
+        sum += taskValue;
+      }
+      if (sum + this.workloadQueue[0] > this.MAX_WORKLOAD) continue;
+
+      this.cache[i].push(this.workloadQueue.shift()!);
+      i++;
+    }
+  }
 
   private standardCaching() {
-    this.cache[this.cache.length - 1] = this.workloadQueue.pop() || 0;
-  }
-
-  private getWorkloadOfColumn(column: number) {
-    return this.cache[column];
+    this.cache[this.cache.length - 1] = [this.workloadQueue.shift()!];
   }
 
   private shiftCache() {
@@ -43,11 +53,15 @@ export class WorkloadService {
 
   private calculateEfficiency() {
     const used = this.cache.reduce(function (a, b) {
-      return a + b;
+      return (
+        a +
+        b.reduce(function (c, d) {
+          return c + d;
+        }, 0)
+      );
     }, 0);
     const max = 20 * this.MAX_WORKLOAD;
     const efficiency = Math.round((used * 100) / max);
-    console.log(efficiency);
     this.efficiency.set(efficiency);
   }
 

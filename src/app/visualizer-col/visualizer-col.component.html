@@ -1,12 +1,5 @@
-<div class="flex flex-col gap-1 *:size-6 *:rounded-sm *:!transition-none">
-  <div [ngClass]="tasks() > 9 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 8 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 7 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 6 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 5 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 4 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 3 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 2 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 1 ? 'bg-primary-400' : 'bg-gray-700'"></div>
-  <div [ngClass]="tasks() > 0 ? 'bg-primary-400' : 'bg-gray-700'"></div>
+<div class="flex flex-col gap-1">
+  @for (cellColor of cellColors; track $index) {
+    <div [ngClass]="cellColor" class="size-6 rounded-sm !transition-none"></div>
+  }
 </div>
