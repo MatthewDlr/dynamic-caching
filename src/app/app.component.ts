@@ -15,4 +15,8 @@ export class AppComponent {
   title = "dynamic-caching";
 
   constructor(public readonly workload: WorkloadService) {}
+
+  public redirectToYoutubeVideo() {
+    window.open("https://youtu.be/ctkW3V0Mh-k?t=376", "_blank");
+  }
 }
