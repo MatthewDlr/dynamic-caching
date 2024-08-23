@@ -1,3 +1,42 @@
-Here's your main page
+<div class="flex h-dvh w-full flex-col items-center gap-20 bg-gray-950 py-20">
+  <div class="flex flex-col justify-center gap-3">
+    <h1 class="text-white text-4xl font-semibold">Dynamic Caching</h1>
+    <p class="text-white flex justify-center text-xl font-light">
+      Cache Efficiency :
+      <strong
+        [ngClass]="workload.mode === 'dynamic' ? 'text-primary-400' : 'text-white'"
+        class="flex min-w-20 justify-center font-bold"
+        >{{ workload.efficiency() }} %</strong
+      >
+    </p>
+  </div>
 
-<router-outlet></router-outlet>
+  <span class="isolate inline-flex rounded-md shadow-sm">
+    <button
+      type="button"
+      (click)="workload.mode = 'standard'"
+      [ngClass]="
+        workload.mode === 'standard'
+          ? 'bg-white cursor-default font-semibold text-primary-950'
+          : 'text-white font-normal hover:bg-white/10'
+      "
+      class="border-white relative flex w-24 items-center justify-center rounded-l-xl border px-3 py-2 text-sm font-semibold"
+    >
+      Standard
+    </button>
+    <button
+      (click)="workload.mode = 'dynamic'"
+      type="button"
+      [ngClass]="
+        workload.mode === 'dynamic'
+          ? 'bg-white cursor-default font-semibold text-primary-950'
+          : 'text-white font-normal hover:bg-white/10'
+      "
+      class="border-white relative -ml-px flex w-24 items-center justify-center rounded-r-xl border px-3 py-2 text-sm"
+    >
+      Dynamic
+    </button>
+  </span>
+
+  <app-visualizer></app-visualizer>
+</div>

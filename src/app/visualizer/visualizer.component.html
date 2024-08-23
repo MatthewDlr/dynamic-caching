@@ -1,0 +1,5 @@
+<div class="border-gray-100 flex gap-1 rounded-md border p-3">
+  @for (task of workload.cache; track $index) {
+    <app-visualizer-col [tasks]="task"></app-visualizer-col>
+  }
+</div>

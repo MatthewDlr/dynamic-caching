@@ -1,19 +1,18 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { environment } from "../environments/environment";
+import { VisualizerComponent } from "./visualizer/visualizer.component";
+import { WorkloadService } from "./workload/workload.service";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, VisualizerComponent],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })
 export class AppComponent {
-  title = "angular-tailwind-template"; // TODO
+  title = "dynamic-caching";
 
-  constructor() {
-    console.info("Current environment:", environment.name);
-  }
+  constructor(public readonly workload: WorkloadService) {}
 }
