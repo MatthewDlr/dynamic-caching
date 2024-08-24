@@ -4,9 +4,10 @@ import { Injectable, signal } from "@angular/core";
   providedIn: "root",
 })
 export class WorkloadService {
-  public MAX_WORKLOAD = 10;
+  public MAX_WORKLOAD = 20;
+  public CACHE_SIZE = 30;
   public mode: "standard" | "dynamic" = "standard";
-  public cache: number[][] = new Array(20).fill([0]);
+  public cache: number[][] = new Array(this.CACHE_SIZE).fill([0]);
   private workloadQueue: number[] = [...this.generateRandomTasks(10)];
   public efficiency = signal(0);
 
@@ -21,9 +22,8 @@ export class WorkloadService {
         this.standardCaching();
       }
 
-      console.log(this.cache);
       this.calculateEfficiency();
-    }, 250);
+    }, 100);
   }
 
   private dynamicCaching() {
@@ -31,13 +31,21 @@ export class WorkloadService {
 
     for (let i = this.cache.length - 2; i > 0; i--) {
       let sum = 0;
+      if (!Array.isArray(this.cache[i])) continue; // Ensure cache[i] is an array
+
       for (const taskValue of this.cache[i]) {
         sum += taskValue;
       }
+
+      if (this.workloadQueue.length === 0) break; // Handle empty workloadQueue
+
       if (sum + this.workloadQueue[0] > this.MAX_WORKLOAD) continue;
 
-      this.cache[i].push(this.workloadQueue.shift()!);
-      i++;
+      const task = this.workloadQueue.shift();
+      if (task !== undefined) {
+        this.cache[i].push(task);
+        i++;
+      }
     }
   }
 
@@ -60,28 +68,33 @@ export class WorkloadService {
         }, 0)
       );
     }, 0);
-    const max = 20 * this.MAX_WORKLOAD;
+    const max = this.CACHE_SIZE * this.MAX_WORKLOAD;
     const efficiency = Math.round((used * 100) / max);
     this.efficiency.set(efficiency);
   }
 
   private generateWorkload() {
     const workload = this.workloadQueue.length;
-    if (workload > 20) return;
+    if (workload > this.CACHE_SIZE) return;
 
     if (workload > 10) {
       this.workloadQueue.push(...this.generateRandomTasks(1));
     } else if (workload > 5) {
-      this.workloadQueue.push(...this.generateRandomTasks(3));
-    } else {
       this.workloadQueue.push(...this.generateRandomTasks(5));
+    } else {
+      this.workloadQueue.push(...this.generateRandomTasks(10));
     }
   }
 
   private generateRandomTasks(numberOfTasks: number): number[] {
     const queue = [];
     for (let i = 0; i < numberOfTasks; i++) {
-      queue.push(Math.floor(Math.random() * this.MAX_WORKLOAD) + 1);
+      const isHigh = Math.floor(Math.random() * 3) + 1;
+      if (isHigh > 1) {
+        queue.push(Math.floor(Math.random() * (this.MAX_WORKLOAD * 0.75)) + 1);
+      } else {
+        queue.push(Math.floor(Math.random() * this.MAX_WORKLOAD));
+      }
     }
     return queue;
   }
