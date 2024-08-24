@@ -30,22 +30,17 @@ export class WorkloadService {
     this.standardCaching();
 
     for (let i = this.cache.length - 2; i > 0; i--) {
-      let sum = 0;
-      if (!Array.isArray(this.cache[i])) continue; // Ensure cache[i] is an array
+      if (this.workloadQueue.length === 0) break;
 
+      let sum = 0;
       for (const taskValue of this.cache[i]) {
         sum += taskValue;
       }
 
-      if (this.workloadQueue.length === 0) break; // Handle empty workloadQueue
-
       if (sum + this.workloadQueue[0] > this.MAX_WORKLOAD) continue;
 
-      const task = this.workloadQueue.shift();
-      if (task !== undefined) {
-        this.cache[i].push(task);
-        i++;
-      }
+      this.cache[i].push(this.workloadQueue.shift()!);
+      i++;
     }
   }
 
@@ -93,7 +88,7 @@ export class WorkloadService {
       if (isHigh > 1) {
         queue.push(Math.floor(Math.random() * (this.MAX_WORKLOAD * 0.75)) + 1);
       } else {
-        queue.push(Math.floor(Math.random() * this.MAX_WORKLOAD));
+        queue.push(Math.floor(Math.random() * this.MAX_WORKLOAD) + 1);
       }
     }
     return queue;

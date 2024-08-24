@@ -1,6 +1,7 @@
-# AngularTailwindTemplate
+# Dynamic Caching
 
-This template aims to quickly get started on an up to date angular project.
+This project is my attempt to reproduce the logic of Apple's dynamic caching feature, introduced in M3 chips.
+
 
 ## Tech Stack 
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
@@ -10,18 +11,3 @@ This template aims to quickly get started on an up to date angular project.
 ![ESLint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 
-- [x] Angular 18 Project
-- [x] Tailwind, the modern CSS framework
-- [x] Tailwind Animated, animate your content with tailwind classes
-- [x] Nightwind, automatically adapts your app for dark mode
-- [x] ESLint, for static code analysis
-- [x] Prettier, formats the code for readability
-
-## Features
-
-- [x] Clean & scalable structure
-- [x] Angular Router
-- [x] Environments (dev, staging and production)
-- [x] API Url interceptor
-- [x] Automatic dark mode support
-- [x] TODO comments, to indicate parts to customize
