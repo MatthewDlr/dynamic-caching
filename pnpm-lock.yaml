@@ -72,9 +72,6 @@ importers:
       '@types/jasmine':
         specifier: ~5.1.4
         version: 5.1.4
-      '@types/tailwindcss':
-        specifier: ^3.1.0
-        version: 3.1.0
       angular-eslint:
         specifier: 18.1.0
         version: 18.1.0(@angular-devkit/core@18.2.1(chokidar@3.6.0))(@angular-devkit/schematics@18.2.1(chokidar@3.6.0))(@typescript-eslint/utils@8.0.0-alpha.38(eslint@9.9.1(jiti@1.21.6))(typescript@5.4.5))(eslint@9.9.1(jiti@1.21.6))(typescript-eslint@8.0.0-alpha.38(eslint@9.9.1(jiti@1.21.6))(typescript@5.4.5))(typescript@5.4.5)
@@ -1878,10 +1875,6 @@ packages:
 
   '@types/sockjs@0.3.36':
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
-
-  '@types/tailwindcss@3.1.0':
-    resolution: {integrity: sha512-JxPzrm609hzvF4nmOI3StLjbBEP3WWQxDDJESqR1nh94h7gyyy3XSl0hn5RBMJ9mPudlLjtaXs5YEBtLw7CnPA==}
-    deprecated: This is a stub types definition. tailwindcss provides its own type definitions, so you do not need this installed.
 
   '@types/wrap-ansi@3.0.0':
     resolution: {integrity: sha512-ltIpx+kM7g/MLRZfkbL7EsCEjfzCcScLpkg37eXEtx5kmrAKBkTJwd1GIAjDSL8wTpM6Hzn5YO4pSb91BEwu1g==}
@@ -7051,12 +7044,6 @@ snapshots:
   '@types/sockjs@0.3.36':
     dependencies:
       '@types/node': 22.5.1
-
-  '@types/tailwindcss@3.1.0':
-    dependencies:
-      tailwindcss: 3.4.10
-    transitivePeerDependencies:
-      - ts-node
 
   '@types/wrap-ansi@3.0.0': {}
 
