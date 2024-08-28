@@ -25,7 +25,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "allowedCommonJsDependencies": [
-              "nightwind"
+              "nightwind",
+              "@firecms/neat"
             ],
             "outputPath": "dist/angular-tailwind-template",
             "index": "src/index.html",

@@ -11,7 +11,7 @@ import { WorkloadService } from "../workload/workload.service";
 })
 export class VisualizerColComponent {
   private PRIMARY_COLORS = ["bg-primary-500", "bg-primary-700", "bg-primary-900"];
-  private DEFAULT_COLOR = "bg-gray-800";
+  private DEFAULT_COLOR = "bg-gray-800/75";
   private OVERFLOW_COLOR = "bg-red-500";
 
   public tasks = input([0]);

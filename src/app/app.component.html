@@ -1,8 +1,11 @@
-<div class="flex h-dvh w-full flex-col items-center gap-10 bg-gray-950 py-20">
+<div
+  class="flex h-dvh w-full flex-col items-center gap-10 py-20"
+  [ngClass]="workload.mode === 'standard' ? 'bg-gray-950' : 'bg-transparent'"
+>
   <div class="flex flex-col items-center justify-center gap-3">
     <button
       (click)="redirectToYoutubeVideo()"
-      class="text-white w-fit rounded-full border border-white/50 px-4 py-2 text-xs font-light hover:bg-white/10"
+      class="text-white w-fit rounded-full border border-white/50 px-4 py-2 text-xs font-light !transition-all hover:bg-white/10"
     >
       What's Dynamic Caching ?
     </button>
@@ -45,4 +48,9 @@
   </span>
 
   <app-visualizer></app-visualizer>
+
+  <app-dynamic-gradient
+    class="absolute top-0 -z-10 h-full w-full animate-fade transition-all animate-duration-500"
+    [ngClass]="workload.mode === 'dynamic' ? 'fade-in' : 'fade-out'"
+  ></app-dynamic-gradient>
 </div>
